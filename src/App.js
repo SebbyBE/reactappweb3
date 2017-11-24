@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import NavBar from './NavBar';
 import Messages from './Messages';
+import BigContainer from './BigContainer';
 
 class App extends Component {
   render() {
@@ -9,6 +10,7 @@ class App extends Component {
       <div>
         <NavBar />
         <Messages />
+        <BigContainer />
       </div>
     );
   }
