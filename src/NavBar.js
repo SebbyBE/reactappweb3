@@ -37,7 +37,7 @@ class NavBar extends Component {
         <nav className="navbar navbar-inverse colorbar">
             <div className="container-fluid">
               <div className="navbar-header">
-                <a className="navbar-brand">Pacman Evolution</a>
+                <a className="navbar-brand" href="http://google.be">Pacman Evolution</a>
               </div>
   
               <ul className="nav navbar-nav navbar-right">
