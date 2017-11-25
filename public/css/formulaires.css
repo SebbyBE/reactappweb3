@@ -49,10 +49,6 @@ input[type=checkbox]{
   color: #ffffff;
 }
 
-.tab-content > div:last-child {
-  display: none;
-}
-
 #remember label{
   color: white;
 }

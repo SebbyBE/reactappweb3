@@ -1,19 +1,32 @@
 import React,{Component} from 'react';
 
 import PacmanImageMenu from './PacmanImageMenu';
-import Inscription from './FormulaireInscription';
+import FormulaireInscription from './FormulaireInscription';
+import FormulaireConnexion from './FormulaireConnexion';
 
-class Formulaires extends Component{
+class Formulaires extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            isInscriptionOpen: true
+        }
+    }
+
+    handleTabChange = (ev) => {
+        ev.preventDefault();
+        ev.target.id === "inscription" ? this.setState({isInscriptionOpen: true}) : this.setState({isInscriptionOpen: false});
+    }
+
     render(){
         return(
             <div id="formulaires">
                 <PacmanImageMenu />
                 <ul className="tab-group">
-                    <li className="tab active"><a>Inscription</a></li>
-                    <li className="tab"><a>Connexion</a></li>
+                    <li className="tab active"><a id="inscription" onClick={this.handleTabChange}>Inscription</a></li>
+                    <li className="tab"><a id="connexion" onClick={this.handleTabChange}>Connexion</a></li>
                 </ul>
                 <div className="tab-content">
-                    <Inscription />
+                    {this.state.isInscriptionOpen ? <FormulaireInscription /> : <FormulaireConnexion /> }
                 </div>
             </div>
         );

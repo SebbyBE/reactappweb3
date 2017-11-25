@@ -1,10 +1,10 @@
 import React,{Component} from 'react';
 
-class FormulaireInscription extends Component {
+class FormulaireConnexion extends Component {
     render(){
         return(
             <div id="signup">
-                <h1>Prêt à jouer? Inscis toi!</h1>
+                <h1>Prêt à jouer? Connecte toi ! </h1>
                 <div id="messageInscription"></div>
 
                 <div id="form">
@@ -29,4 +29,4 @@ class FormulaireInscription extends Component {
     }
 }
 
-export default FormulaireInscription;
+export default FormulaireConnexion;
