@@ -4,6 +4,15 @@ import PacmanImageMenu from './PacmanImageMenu'
 import ButtonEnterAccueil from './ButtonEnterAccueil'
 
 class Acceuil extends Component{
+    constructor(props){
+        super(props);
+        this.accueilHandle = this.accueilHandle.bind(this);
+    }
+
+    accueilHandle = (message) => {
+        this.props.action(message);
+    }
+
     render(){
         return(
             <div id="acceuil center-block">
@@ -29,7 +38,7 @@ class Acceuil extends Component{
                         </blockquote>
                     </div>
                 </div>
-                <ButtonEnterAccueil />
+                <ButtonEnterAccueil action={this.accueilHandle} />
             </div>
         );
     }
