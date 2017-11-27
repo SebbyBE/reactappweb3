@@ -11,15 +11,15 @@ class FormulaireInscription extends Component {
 
                 <div className="row">
                     <label>Pseudo<span className="req">*</span></label>
-                    <input type="text" required autocomplete="off" id="pseudoInscription" />
+                    <input type="text" required autoComplete="off" id="pseudoInscription" />
                 </div>
 
                 <div className="row">
                     <label>Mot de passe<span className="req">*</span></label>
-                    <input type="password" required autocomplete="off" id="mdpInscription" />
+                    <input type="password" required autoComplete="off" id="mdpInscription" />
                 </div>
 
-                <div class="row">
+                <div className="row">
                     <button type="submit" className="button button-block" id="sInscrire" >C'est parti!</button>
                 </div>
 
