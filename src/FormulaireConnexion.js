@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 
+import * as states from './AppState';
+
 class FormulaireConnexion extends Component {
   constructor(props){
     super(props);
@@ -14,14 +16,32 @@ class FormulaireConnexion extends Component {
 
   login = (ev) =>{
     ev.preventDefault();
-    console.log("je dois encore faire des trucs");
     axios.post('/seConnecter',{
       login:this.state.login,
       passwd:this.state.mdp
     }).then((result) =>{
       console.log(result);
       sessionStorage.setItem("authName",result.data.authName);
-      sessionStorage.setItem("token",result.data.toker);
+      sessionStorage.setItem("token",result.data.token);
+      this.props.update(
+        Object.assign(
+          this.props.state,
+          {'connected':true,
+          'render':states.PROFILE,
+          'player':{
+              'login':result.data.authName,
+              "currentGhost": result.data.currentGhost,
+              "currentPacman": result.data.currentPacman,
+              "bestScoreGhost": result.data.bestScoreGhost,
+              "bestScorePacman": result.data.bestScorePacman,
+              "nbPlayedGames": result.data.nbPlayedGames,
+              "nbVictory": result.data.nbVictory,
+              "nbDefeat": result.data.nbDefeat,
+              "ghostSkins": result.data.ghostSkins,
+              "pacmanSkins": result.data.pacmanSkins
+          }
+        })
+      );
     }).catch((err) => {
       console.log(err);
     }
@@ -34,8 +54,6 @@ class FormulaireConnexion extends Component {
   }
 
   textInputChanged(ev) {
-    console.log("id", ev.target.id);
-    console.log("valeur", ev.target.value);
     this.setState({[ev.target.id]: ev.target.value});
   }
 

@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 
 import PacmanImageMenu from './PacmanImageMenu'
 
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as stateModifiers from './actions/stateActions';
-
 import * as states from './AppState';
 const axios = require('axios');
 
@@ -13,22 +9,25 @@ class Acceuil extends Component{
     constructor(props){
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.state = this.props.state;
     }
     handleClick = (ev) => {
         ev.preventDefault();
         console.log("React fait coucou -> on clic accueil");
+        console.log(sessionStorage.getItem("token"));
         axios.get('/verifyLoggedIn', {
             token : sessionStorage.getItem("token")
         })
           .then((response) => {
             console.log("Session active "+sessionStorage.getItem("authName") + "   " + sessionStorage.getItem("token"));
-            this.props.actions.modifyRenderNC(this.props.stateApp, states.CONNECTED);
+            this.setState(Object.assign(this.state,{'render':states.PROFILE,'connected':true}));
           })
           .catch((error) => {
             sessionStorage.removeItem("authName");
             sessionStorage.removeItem("token");
             console.log("No active session");
-            this.props.actions.modifyRenderNC(this.props.stateApp, states.NO_CONNECTION);
+            this.setState(Object.assign(this.state,{'render':states.NO_CONNECTION}))
+            this.props.update(this.state);
           });
     }
 
@@ -66,16 +65,4 @@ class Acceuil extends Component{
     }
 }
 
-function mapStateToProps(state, ownProps){
-    return{
-        stateApp: state
-    };
-}
-
-function mapDispatchToProps(dispatch){
-    return{
-        actions: bindActionCreators(stateModifiers, dispatch)
-    };
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(Acceuil);
+export default Acceuil;
