@@ -10,22 +10,25 @@ import * as states from './AppState';
 const axios = require('axios');
 
 class Acceuil extends Component{
-    handleClick = (ev)=>{
-        var that = this;
+    constructor(props){
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick = (ev) => {
         ev.preventDefault();
         console.log("React fait coucou -> on clic accueil");
         axios.get('/verifyLoggedIn', {
-            token : localStorage.getItem("token")
+            token : sessionStorage.getItem("token")
         })
-          .then(function (response) {
-            console.log("Session active "+localStorage.getItem("authName") + "   " + localStorage.getItem("token"));
-            that.props.actions.modifyRenderNC(that.props.stateApp, states.CONNECTED);
+          .then((response) => {
+            console.log("Session active "+sessionStorage.getItem("authName") + "   " + sessionStorage.getItem("token"));
+            this.props.actions.modifyRenderNC(this.props.stateApp, states.CONNECTED);
           })
-          .catch(function (error) {
-            localStorage.removeItem("authName");
-            localStorage.removeItem("token");
+          .catch((error) => {
+            sessionStorage.removeItem("authName");
+            sessionStorage.removeItem("token");
             console.log("No active session");
-            that.props.actions.modifyRenderNC(that.props.stateApp, states.NO_CONNECTION);
+            this.props.actions.modifyRenderNC(this.props.stateApp, states.NO_CONNECTION);
           });
     }
 
