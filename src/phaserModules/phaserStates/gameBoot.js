@@ -1,5 +1,6 @@
 var bootState = {
 	preload: function(){
+		console.log(sessionStorage);
 		game.load.image('bg', 'assets/bg.png');
 		game.load.image('title', 'assets/title.png');
 		game.load.image('mode', 'assets/mode.png');
